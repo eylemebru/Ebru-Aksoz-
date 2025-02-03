@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Page</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(
+          45deg,
+          #ff9a9e,
+          #fad0c4,
+          #fad0c4,
+          #fbc2eb,
+          #a18cd1
+        );
+        background-size: 400% 400%;
+        animation: gradientBackground 10s ease infinite;
+      }
+
+      @keyframes gradientBackground {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #videoContainer {
+        margin: 50px auto;
+        width: 560px;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .animate-box {
+        width: 50px;
+        height: 50px;
+        background-color: #4caf50;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        border-radius: 50%;
+        animation: sizeChange 2s ease-in-out infinite alternate,
+          colorChange 5s linear infinite;
+      }
+
+      @keyframes sizeChange {
+        0% {
+          width: 50px;
+          height: 50px;
+        }
+        100% {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      @keyframes colorChange {
+        0% {
+          background-color: #4caf50;
+        }
+        25% {
+          background-color: #ff6f61;
+        }
+        50% {
+          background-color: #ffeb3b;
+        }
+        75% {
+          background-color: #2196f3;
+        }
+        100% {
+          background-color: #4caf50;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Best Song</h1>
+
+    <div id="videoContainer">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/EMr5xPBvVeA"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      >
+      </iframe>
+    </div>
+
+    <div class="animate-box" id="box"></div>
+
+    <script>
+      const box = document.getElementById("box");
+      let posX = 50;
+      let posY = 50;
+      let velX = 3;
+      let velY = 3;
+      const boxSize = 50;
+
+      function moveBox() {
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        posX += velX;
+        posY += velY;
+
+        if (posX + boxSize > screenWidth || posX < 0) {
+          velX = -velX;
+        }
+
+        if (posY + boxSize > screenHeight || posY < 0) {
+          velY = -velY;
+        }
+
+        box.style.left = posX + "px";
+        box.style.top = posY + "px";
+
+        requestAnimationFrame(moveBox);
+      }
+
+      moveBox();
+    </script>
+  </body>
+</html>
